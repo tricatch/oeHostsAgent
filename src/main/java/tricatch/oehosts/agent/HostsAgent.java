@@ -16,7 +16,7 @@ import java.util.List;
  * Loads the hosts mapping from oeHosts share URLs and keeps it fresh. Started from
  * {@link Agent#premain} once the lookup hook is in place:
  * <pre>
- * java -javaagent:oehosts-agent-&lt;version&gt;.jar=http://127.0.0.1:36981/hosts/&lt;id&gt;-&lt;sig&gt;/&lt;name&gt; -jar app.jar
+ * java -javaagent:oehosts-agent.jar=http://127.0.0.1:36981/hosts/&lt;id&gt;-&lt;sig&gt;/&lt;name&gt; -jar app.jar
  * </pre>
  * Several URLs are separated by {@code ,}; earlier ones win for a host listed in more than one.
  * Options are system properties:
@@ -58,7 +58,7 @@ public final class HostsAgent {
         String spec = args != null && !args.trim().isEmpty() ? args : System.getProperty("oehosts.agent.url", "");
         urls = parseUrls(spec);
         if (urls.isEmpty()) {
-            log("no share URL given (-javaagent:oehosts-agent-<version>.jar=<url>); hosts mapping is off.");
+            log("no share URL given (-javaagent:oehosts-agent.jar=<url>); hosts mapping is off.");
             return;
         }
         load();
