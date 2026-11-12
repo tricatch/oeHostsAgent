@@ -24,6 +24,13 @@ A `-javaagent` that maps host names to the addresses listed at an oeHubApp oeHos
 
 - `AgentTest` starts child JVMs on JDK 8, 11, 17 (Gradle toolchains, downloaded by the foojay resolver) and the build JDK with `-javaagent:<built jar>` against a local HTTP server; the child runs `src/testApp` (compiled for 8) and nothing else on its class path, so the agent is loaded from the jar only. Run the whole suite after any change to the hooks, the resolver or the loader.
 
+## Release
+
+- Tag = bare version (`0.1.0`, no `v`), the same as `version` in `build.gradle.kts` and the jar manifest's `Implementation-Version`. Release assets: `oehosts-agent.jar` (the built `oehosts-agent-<version>.jar`, renamed) and `SHA256SUMS.txt` (`sha256sum` format, two spaces, no `*`). Release notes in Korean.
+- Keep both asset names and the tag rule exactly: oeHubApp (`../oeHubApp`, `HostsAgent`) installs `releases/latest/download/oehosts-agent.jar` on every start when the tag is newer than the installed agent, and rejects it unless the checksum and the manifest version match.
+- Run the whole test suite before releasing. After publishing, download the jar back and check its sha256.
+- oeHubApp also bundles the agent from this checkout at its own build time; a new agent release reaches users without an oeHubApp release, but bump oeHubApp's bundled copy at its next release.
+
 ## Documentation Language
 
 - Source code comments are in English; `README.md` is in Korean.

@@ -11,7 +11,12 @@ Java 애플리케이션에 `-javaagent`로 붙여, [oeHubApp](https://github.com
 | 8 | JDK 내부의 이름 조회 목록(`InetAddress.nameServices`) 맨 앞에 추가 |
 
 - 8과 9~17은 JDK 내부 구조를 쓰는 방식입니다. 연결에 실패하면 경고만 출력하고 매핑 없이 애플리케이션을 그대로 실행합니다.
-- 의존성이 없는 jar 하나(`oehosts-agent-<버전>.jar`)입니다.
+- 의존성이 없는 jar 하나(`oehosts-agent.jar`)입니다.
+
+## 받기
+
+- **oeHubApp을 쓰면 따로 받을 필요가 없습니다.** oeHubApp에 에이전트가 들어 있어 앱 폴더에 `oehosts-agent.jar`로 설치되고, 앱이 시작할 때마다 이 저장소의 최신 릴리스를 확인해 자동으로 업데이트합니다. 설정 → oeHosts → Java 에이전트에서 `-javaagent` 옵션을 그대로 복사할 수 있습니다.
+- 직접 받으려면 [최신 릴리스](https://github.com/tricatch/oeHostsAgent/releases/latest)에서 `oehosts-agent.jar`를 받습니다. 함께 올라간 `SHA256SUMS.txt`로 체크섬을 확인할 수 있습니다.
 
 ## 사용법
 
@@ -19,7 +24,7 @@ Java 애플리케이션에 `-javaagent`로 붙여, [oeHubApp](https://github.com
 2. 애플리케이션을 실행할 때 에이전트와 URL을 붙입니다.
 
 ```sh
-java -javaagent:oehosts-agent-<버전>.jar=http://127.0.0.1:36981/hosts/<ID>-<서명>/<이름> -jar app.jar
+java -javaagent:oehosts-agent.jar=http://127.0.0.1:36981/hosts/<ID>-<서명>/<이름> -jar app.jar
 ```
 
 ```
